@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jhh.dc.loan.mapper.product.ProductExtMapper" >
+  <resultMap id="BaseResultMap" type="com.jhh.dc.loan.entity.app.ProductExt" >
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="property" property="property" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="sync" property="sync" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.jhh.dc.loan.entity.app.ProductExt" >
+    insert into c_product_ext (product_id, property, value, 
+      status, sync)
+    values (#{productId,jdbcType=INTEGER}, #{property,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{sync,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jhh.dc.loan.entity.app.ProductExt" >
+    insert into c_product_ext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="property != null" >
+        property,
+      </if>
+      <if test="value != null" >
+        value,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="sync != null" >
+        sync,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="property != null" >
+        #{property,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sync != null" >
+        #{sync,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="selectValue" resultType="java.lang.String">
+    select value from c_product_ext where product_id = #{productId}
+    AND property = #{property} AND status = 1
+  </select>
+</mapper>

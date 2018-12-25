@@ -1,0 +1,118 @@
+@charset "utf-8";
+
+.checked i {
+  position: absolute;
+  top:0;
+  left:0;
+  width: .7rem;
+  height: .7rem;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-radius: 2px;
+  margin-top: .3rem;
+  background-color: #fff;
+
+}
+.checked i.active {
+  background: #fff url('../../images/enjoyShop/gou1@2x.png') no-repeat center;
+  background-size: 80% 90%;
+  -webkit-background-size: 80% 90%;
+}
+.checked {
+  position: relative;
+  color: #fff;
+  margin: 1.25rem 2rem .75rem;
+}
+
+.checked div {
+  padding-left: 1.2rem;
+}
+.head img {
+  float: left;
+  width: 100%;
+  height: auto;
+}
+.main,.head,body {
+  background-color: #32CBA1;
+}
+.main li{
+  position: relative;
+  padding: 0 1rem 1.4rem;
+}
+.main li input{
+  width: 100%;
+  height: 2.1rem;
+  line-height: 2.1rem;
+  border-radius: 1rem; 
+  background-color: #fff;
+  border: none;
+  padding-left: 1rem;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  font-size: .8rem;
+}
+.main li p{
+  width: 100%;
+  height: 2.1rem;
+  line-height: 2.1rem;
+  border-radius: 1rem; 
+  background-color: #fff;
+  padding-left: 1rem;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.main li span {
+  position: absolute;
+  right: 2rem;
+  top: 0.25rem;
+}
+.main li a {
+  position: absolute;
+  right: 2rem;
+  top: 0.5rem;
+}
+.main li img {
+  width: 5rem;
+  height: auto;
+}
+.main .loginBtn {
+  width: 100%;
+  height: 2.1rem;
+  line-height: 2.1rem;
+  background: linear-gradient(15deg ,#FFE68D 70%,#fff);
+  background: -webkit-linear-gradient(15deg ,#FFE68D 70%,#fff);
+  box-shadow: 0 0 11px #FFE68D;
+  border: none;
+  color: #32CBA1;
+  font-size: .9rem;
+  border-radius: 1rem; 
+  font-weight: 700;
+}
+.main .foot {
+  padding: 0 1rem 2.5rem;
+}
+.footer img{
+  display: block;
+  width: 4.2rem;
+  height: auto;
+  margin: 0 auto;
+}
+.footer {
+  background-color: #fff;
+  padding: 1rem 0;
+}
+i{
+  font-style: normal;
+}
+li .tips {
+  position: absolute;
+  top: 2.2rem;
+  left: 2rem;
+  font-size: .65rem;
+}
+.checked .tips {
+  font-size: .65rem;
+
+}
+

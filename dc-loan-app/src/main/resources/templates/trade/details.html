@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <link rel="stylesheet" href="/dc-loan-app/css/enjoyShop/common.css">
+    <link rel="stylesheet" th:href="@{/css/enjoyShop/G-contract.css}">
+    <link rel="stylesheet" th:href="@{/css/enjoyShop/details.css}">
+    <script th:src="@{/js/jquery-1.11.2.min.js}"></script>
+    <script th:src="@{/js/app.js}"></script>
+    <script th:src="@{/js/ajaxhook.min.js}"></script>
+    <script th:src="@{/js/base.js}"></script>
+    <title>详情页</title>
+</head>
+<body>
+<div class="title">
+    <p><a class="jumpApp"></a>详情页</p>
+</div>
+<div class="wrapBox">
+    <div class="content">
+        <ul>
+            <li class="clearfix">
+                <p class="fl">申请时间</p>
+                <span class="fr"
+                      th:text="${details.askborrDate == null ? '--' : #dates.format(details.askborrDate, 'yyyy-MM-dd')}"></span>
+            </li>
+            <li class="clearfix">
+                <p class="fl">申请编号</p>
+                <span class="fr " th:text="${details.borrNum}"></span>
+            </li>
+            <li class="clearfix">
+                <p class="fl">申请金额</p>
+                <span class="fr" th:text="${#numbers.formatDecimal(details.borrAmount,1,2)}+'元'"></span>
+            </li>
+            <li class="clearfix">
+                <p class="fl">期限</p>
+                <span class="fr" th:text="${details.termDay * details.termNum}+'天'"></span>
+            </li>
+            <li class="clearfix">
+                <p class="fl">发放日</p>
+                <span class="fr"
+                      th:text="${ details.payDate == null ? '--': #dates.format(details.payDate, 'yyyy-MM-dd')}"></span>
+            </li>
+            <li class="clearfix">
+                <p class="fl">还款日</p>
+                <span class="fr"
+                      th:text="${details.planrepayDate == null ? '--' : #dates.format(details.planrepayDate, 'yyyy-MM-dd')}"></span>
+            </li>
+            <li class="clearfix">
+                <p class="fl">付清日</p>
+                <span class="fr"
+                      th:text="${details.actRepayDate == null ? '--' : #dates.format(details.actRepayDate,'yyyy-MM-dd')}"></span>
+            </li>
+            <li class="clearfix">
+                <p class="fl">到期应付</p>
+                <span class="fr" th:text="${#numbers.formatDecimal(details.planRepay,1,2)}+'元'"></span>
+            </li>
+            <li class="clearfix">
+                <p class="fl">剩余应付</p>
+                <span class="fr" th:if="${details.amountSurplus != null}" th:text="${#numbers.formatDecimal(details.amountSurplus,1,2)}+'元'"></span>
+            </li>
+            <li class="clearfix">
+                <p class="fl">合同状态</p>
+                <span class="fr" th:text="${details.borrStatusName}" id="borrStatusName"></span>
+            </li>
+            <li class="clearfix">
+                <p class="fl">我的合同</p>
+                <span class="fr"><a th:href="@{/agreement/myContract/{borrId}(borrId=${details.borrId})}" class="color" id="search"></a></span>
+            </li>
+            <li class="clearfix">
+                <p class="fl">银行卡管理</p>
+                <span class="fr"><a th:href="@{'/form/bankManagement/'+${details.perId}+'/'+${#httpServletRequest.getAttribute('phone')}+'/'+${details.borrNum}}" class="color">查看</a></span>
+            </li>
+        </ul>
+    </div>
+    <footer class="clearfix">
+        <button type="button" class="cancel btn fl"  id="btn"></button>
+        <button type="button" class="goBtn btn fr" id="goBtn"></button>
+    </footer>
+</div>
+<div class="successModal hide">
+    <div class="modalBox">
+        <div class="top">提 示</div>
+        <div class="content">
+            <p>您确定要取消该订单吗？</p>
+        </div>
+        <div class="foot">
+            <a href="javascript:;" class="trueBtn" >确 定</a>
+            <a href="Javascript:;" class="cancelBtn">取 消</a>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+var borrStatus = [[${details.borrStatus}]];
+var perId = [[${details.perId}]];
+var borrId = [[${details.borrId}]];
+var borrStatusName = [[${details.borrStatusName}]];
+var prodId = [[${details.prodId}]];
+var phone = [[${#httpServletRequest.getAttribute('phone')}]];
+</script>
+
+<script th:src="@{/js/trade/details.js}"></script>
+</body>
+</html>

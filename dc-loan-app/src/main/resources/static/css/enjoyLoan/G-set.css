@@ -1,0 +1,253 @@
+@charset "utf-8";
+/* 设置密码 */
+
+.toast {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  padding: .5rem;
+  background-color: rgba(0, 0, 0, .5); 
+  border-radius: 5px; 
+  color: #fff;
+  z-index: 999;
+}
+
+html,body{
+  height: 100%;
+  background-color: #fff;
+}
+.setPwd,.forgetPwd {
+  padding: 1rem;
+}
+.setPwd input,.forgetPwd input ,.getPwd input{
+  position: relative;
+  width: 100%;
+  border: none;
+  font-size: .75rem;
+  margin-top: 1.3rem;
+  z-index: 333;
+}
+.setPwd p{
+  color: #f00;
+  font-size: .65rem;
+  margin-top: .8rem;
+}
+.setPwd div,.forgetPwd div {
+  position: relative;
+  height: 3rem;
+  border-bottom: 1px solid #e6e6e6;
+}
+.setPwd i , .forgetPwd i{
+  font-style: normal;
+  position: absolute;
+  height: 0;
+  opacity: 0;
+  bottom: .5rem;
+  left:0;
+  font-size: .55rem;
+  color: #32CBA1;
+}
+
+/* 忘记密码 */
+.forgetPwd p{
+  padding-top: 1rem;
+}
+.forgetPwd span {
+  position: absolute;
+  right: 0;
+  top: 0.85rem;
+  z-index: 444;
+}
+
+.forgetPwd img{
+  width: 5rem;
+}
+
+.forgetPwd .sendBtn {
+  position: absolute;
+  right:0;
+  top: .85rem;
+  z-index: 444;
+  width: 4.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;  
+  text-align: center;
+  border: 1px solid #32CBA1;
+  color: #32CBA1 !important;
+  font-size: .55rem;
+  border-radius: 5px;
+}
+
+/* getPwd */
+.getModal{
+  position: fixed;
+  top:0;
+  left:0;
+  background-color: rgba(0, 0, 0, .7);
+  width: 100%;
+  height: 100%;
+}
+.getPwd {
+  position: fixed;
+  top: 50%;
+  left:50%;
+  width: 12rem;
+  height: auto;
+  background-color: #fff;
+  border-radius: .5rem;
+  margin-left: -7rem;
+  padding: 1rem 1rem 1.5rem;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+.getPwd i{
+  position: absolute;
+  top: -3rem;
+  right:0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1.7rem;
+  text-align: center;
+  font-style: normal;
+}
+.getPwd i::after {
+  content:'';
+  position: absolute;
+  height: 1.4rem;
+  border-left: 1px solid #fff;
+  bottom:-1.5rem;
+  right:.95rem;
+}
+.getPwd p{
+  color: #666;
+} 
+.getPwd input {
+  height: 1.8rem;
+  line-height: 1.8rem;
+  border: 1px solid #e6e6e6;
+  padding-left: .5rem;
+  border-radius: .3rem;
+  width: 100%;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+.getPwd .fr {
+  color: #32CBA1;
+}
+.forgetBtn {
+  color: #32CBA1;
+  text-decoration: underline;
+}
+
+.btn {
+  width: 100%;
+  margin-top: 1rem;
+}
+/* 购物卡 */
+.shopCard {
+  padding: 1.5rem 0 1rem;
+}
+.shopCard h2{
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  padding-left: 1.5rem;
+}
+.shopCard .card{
+  width: 90%;
+  height: 9rem;
+  color: #fff;
+  background: url('../../images/enjoyShop/jindongka_fanmian.png') no-repeat center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  margin: auto;
+}
+
+.shopCard .card .top {
+  padding: .5rem 1rem 0;
+  line-height: 1rem;
+}
+.shopCard .card .top img{
+  width: 1rem;
+  height: auto;
+  margin-right: .5rem;
+}
+.shopCard .card p{
+  padding: .2rem 1rem 0;
+}
+.shopCard .cardBox a{
+  display: block;
+  width: 13rem;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  text-align: center;
+  margin: 1rem auto;
+  background-color: #F3F5F9;
+  color: #FBC65A;
+  font-size: .85rem;
+  border-radius:.5rem;
+}
+.shopCard .cardBox p{
+  color: #666;
+  font-size: .65rem;
+  height: auto;
+  padding-left: 1.5rem;
+  padding-top: .4rem;
+}
+.shopCard  .tips {
+  color: #FF6A38;
+  padding-left: 1.5rem;
+  margin-top: .5rem;
+}
+.center {
+  height: 2rem;
+  line-height: 2rem;
+  color: #666;
+  background-color: #f7f7f7;
+  padding-left: 1.5rem;
+  font-size: .65rem;
+}
+.shopBtn{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.platList li {
+  position: relative;
+  height: 3.5rem;
+  border-bottom: 1px solid #e6e6e6;
+}
+.platList img {
+  width: 2rem;
+  height: auto;
+  margin: .8rem .5rem 0 1.5rem;
+}
+.platList li p {
+  font-size: .85rem;
+  font-weight: 700;
+  margin-top: .85rem;
+  line-height: .85rem;
+  color: #333;
+}
+.platList li span {
+  color: #999;
+  font-size: .65rem;
+}
+.platList i {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  width: .3rem;
+  height: .5rem;
+}
+.platList i img{
+  width: 100%;
+  margin: 0;
+}

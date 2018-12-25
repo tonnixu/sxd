@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns="http://java.sun.com/jsf/facelets">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <link rel="stylesheet" th:href="@{/css/enjoyShop/common.css}">
+  <link rel="stylesheet" th:href="@{/css/enjoyShop/G-contract.css}">
+  <link rel="stylesheet" th:href="@{/css/enjoyLoan/sign.css}">
+  <script th:src="@{/js/jquery-1.11.2.min.js}"></script>
+  <script th:src="@{/js/app.js}"></script>
+  <script th:src="@{/js/ajaxhook.min.js}"></script>
+  <script th:src="@{/js/base.js}"></script>
+  <title>签约</title>
+</head>
+<body >
+  <div class="title">
+    <p><a class="goBackApp"></a>签约</p>
+  </div>
+  <header>
+    <h2 class="color">请您仔细阅读以下信息及电子合同</h2>
+  </header>
+  <div class="content">
+    <form action="">
+    <input type="hidden"  name="perId" th:value="${signInfo.perId}"/>
+    <input type="hidden" name="borrId" th:value="${signInfo.borrId}" />
+    <input type="hidden" name="loanUse" id="loanUse" />
+    </form>
+    <ul th:if="${#httpServletRequest.getAttribute('prodType') == 'pay_card'}">
+      <li class="clearfix">
+        <p class="fl">姓名</p>
+        <span class="fr" th:text="${signInfo.name}"></span>
+      </li>
+      <li class="clearfix">
+        <p class="fl">购物卡面值</p>
+        <span class="fr" th:text="${#numbers.formatDecimal(signInfo.borrAmount,1,2)}+'元'"></span>
+      </li>
+      <li class="clearfix">
+        <p class="fl">付款期限</p>
+        <span class="fr" th:text="${signInfo.termNum * signInfo.termDay}+'天'"></span>
+      </li>
+      <li class="clearfix">
+        <p class="fl">到期应还</p>
+        <span class="fr" th:text="${#numbers.formatDecimal(signInfo.planRepay,1,2)}+'元'"></span>
+      </li>
+    </ul>
+    <!--随薪贷-->
+    <ul th:if="${#httpServletRequest.getAttribute('prodType') == 'pay_money'}">
+      <li class="clearfix">
+        <p class="fl">姓名</p>
+        <span class="fr" th:text="${signInfo.name}"></span>
+      </li>
+      <li class="clearfix">
+        <p class="fl">借款金额</p>
+        <span class="fr" th:text="${#numbers.formatDecimal(signInfo.borrAmount,1,2)}+'元'"></span>
+      </li>
+      <li class="clearfix" th:if="${signInfo.payAmount != null}">
+        <p class="fl">借款到帐</p>
+        <span class="fr" th:text="${#numbers.formatDecimal(signInfo.payAmount,1,2)}+'元'"></span>
+      </li>
+      <li class="clearfix">
+        <p class="fl">借款期限</p>
+        <span class="fr" th:text="${signInfo.termNum * signInfo.termDay}+'天'"></span>
+      </li>
+      <li class="clearfix">
+        <p class="fl">银行卡号</p>
+        <span class="fr" th:text="${signInfo.bankNum}"></span>
+      </li>
+      <li class="clearfix">
+        <p class="fl">到期应还</p>
+        <div th:if="${signInfo.serviceFeePosition == 1}">
+        <a class="color des" style="float: right">详情</a>
+        </div>
+        <span class="fr " th:text="${#numbers.formatDecimal(signInfo.planRepay,1,2)}+'元'"></span>
+      </li>
+      <li class="clearfix">
+        <p class="fl">借款用途</p>
+        <div class="fr method">
+          请选择您的借款用途
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="checked">
+    <div><i class="clickBtn active"></i>我已阅读 <span class="ff9e13">《<a th:href="@{/agreement/saleContract/{borrId}(borrId=${signInfo.borrId})}" class="ff9e13 dot"
+    th:text="${#httpServletRequest.getAttribute('prodType') == 'pay_card' ? '销售合同》' : '借款合同》'}"></a></span></div>
+    <p class="hide danger">请先阅读协议同意后勾选</p>
+  </div>
+  <footer>
+    <button type="button" class="btn">签 约</button>
+  </footer>
+  <!-- 下拉框 -->
+  <div class="modal hide">
+    <div class="list hide">
+      <ul>
+        <li>请选择您的借款用途</li>
+        <li>个人日常消费</li>
+        <li>装修</li>
+        <li>旅游</li>
+        <li>教育</li>
+        <li>医疗</li>
+        <li>其他</li>
+        <li class="cancel">取消</li>
+      </ul>
+    </div>
+  </div>
+  <div th:replace="common/promptBox::promptBox"></div>
+
+  <!-- 签约成功的弹框 -->
+  <div class="successModal hide">
+    <div class="modalBox">
+      <div class="top"><img  th:src="${#httpServletRequest.getAttribute('prodType') == 'pay_card'}?@{/images/enjoyShop/tc_top.png}:@{/images/enjoyLoan/tc_top.png}"></div>
+      <div class="content">
+        <p>恭喜您签约成功，请注意接听抽样审核电话！</p>
+      </div>
+      <div class="foot" style=" padding-bottom: 1rem;">
+        <a href="javascript:;" th:class="${signInfo.serviceFeePosition == 0 ? 'complete':'goBackApp'}">知 道 了</a>
+      </div>
+    </div>
+  </div>
+  <!-- 还款明细预览 -->
+  <div class="payModal hide" th:if="${signInfo.serviceFeePosition == 1}">
+    <div class="desMain hide">
+      <div class="top">
+        <h2 class="color tac">还款明细预览</h2>
+        <p class="tac">到期应还：<span class="color" th:text="${#numbers.formatDecimal(signInfo.planRepay,1,2)}+'元'"></span></p>
+      </div>
+      <div class="payContent">
+        <ol>
+          <li class="clearfix">
+            <p class="fl">本金：</p>
+            <p class="fr" th:text="${#numbers.formatDecimal(signInfo.payAmount,1,2)}+'元'"></p>
+          </li>
+          <li class="clearfix">
+            <p class="fl">利息：</p>
+            <p class="fr" th:text="${#numbers.formatDecimal(signInfo.interestRate,1,2)}+'元'"></p>
+          </li>
+          <li class="clearfix">
+            <p class="fl tal">
+              <span>咨询服务费：</span>
+              <span th:text="${#numbers.formatDecimal(signInfo.serviceFee,1,2)}+'元'" style="float: right"></span>
+              <br />
+              <span class="ff9e13" th:utext="${signInfo.signHint}"></span>
+            </p>
+          </li>
+        </ol>
+      </div>
+      <div class="foot">
+        <a href="javascript:;" class="cancelBtn">知道了</a>
+      </div>
+    </div>
+  </div>
+  <script th:inline="javascript">
+    var serviceFeePosition = [[${signInfo.serviceFeePosition}]];
+  </script>
+  <script th:src="@{/js/trade/sign.js}"></script>
+
+</body>
+</html>

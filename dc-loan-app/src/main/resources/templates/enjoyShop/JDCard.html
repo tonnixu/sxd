@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <!-- 允许全屏模式浏览 -->
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" th:href="@{/css/enjoyShop/common.css}">
+  <link rel="stylesheet" th:href="@{/css/enjoyShop/G-set.css}">
+  <script th:src="@{/js/jquery-1.11.2.min.js}"></script>
+  <script th:src="@{/js/app.js}"></script>
+  <script th:src="@{/js/ajaxhook.min.js}"></script>
+  <script th:src="@{/js/base.js}"></script>
+  <title>随心购</title>
+</head>
+
+<body>
+  <div class="title">
+    <p>
+      <a class="historyJD"></a>随心购</p>
+  </div>
+  <div class="shopCard">
+    <h2>尊享京东购物卡</h2>
+    <div class="card">
+      <div class="top clearfix">
+        <div class="fl clearfix">
+          <img th:src="@{/images/enjoyShop/jdcard.png}" alt="" ><span class="f1"> 京东E卡</span></div>
+        <div class="fr"><span th:text="${cardInfo.amount}+'元'"></span></div>
+      </div>
+      <p th:inline="text">[[${cardInfo.endDate}]]到期</p>
+      <div class="cardBox">
+        <a href="javascript:;">获取卡号卡密</a>
+        <!-- <p>卡号 ：JD656565656587876513</p>
+        <p>密码 ：AF-KU-D45451217421217</p>
+        <p>有效期 ：2016/01/03-2018/01/03</p> -->
+      </div>
+    </div>
+    <p class="tips">温馨提示：请不要轻易将卡密告诉他人！</p>
+  </div>
+  <div class="center">您可以通过这些平台进行使用</div>
+  <div class="platList">
+    <ul>
+      <li class="clearfix jd">
+        <a href="javascript:;">
+          <img th:src="@{/images/enjoyShop/jingdong.png}" alt="" class="fl">
+          <div class="fl">
+            <p>京东</p>
+            <span>只为品质生活</span>
+          </div>
+          <i>
+            <img th:src="@{/images/icon.png}" alt="">
+          </i>
+        </a>
+      </li>
+      <li class="clearfix xy">
+        <a href="javascript:;">
+          <img th:src="@{/images/enjoyShop/xianyu.png}" alt="" class="fl">
+          <div class="fl">
+            <p>咸鱼</p>
+            <span>把你的闲置游起来</span>
+          </div>
+          <i>
+            <img th:src="@{/images/icon.png}" alt="">
+          </i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <button type="button" class="btn shopBtn" th:text="${cardInfo.borrStatusName}"></button>
+  <!-- 弹窗获取卡密 -->
+  <div class="getModal" style="display: none">
+
+    <div class="getPwd">
+      <form >
+        <input type="hidden" name="phone" th:value="${phone}" />
+        <div>
+          <p>请输入6位数字交易密码</p>
+          <input type="password" name="password" class="pwd" placeholder="请输入6位数字交易密码" />
+        </div>
+        <div class="clearfix">
+          <span class="fr">
+            <a href="javascript:;" class="forgetBtn">忘记密码</a>?</span>
+        </div>
+        <button type="button" class="btn trueBtn">确 认</button>
+      </form>
+      <i class="circle">×</i>
+    </div>
+    <p class="toast" style="display: none"></p>
+  </div>
+</body>
+
+<script th:inline="javascript">
+  var phone = [[${phone}]];
+  var jdCardId = [[${cardInfo.id}]];
+  var borrNum = [[${cardInfo.borrNum}]];
+  $(function () {
+    var returnUrl = "/form/jdCard/"+phone+"/"+borrNum+"?prodType="+prodType;
+    //忘记密码
+    $('.forgetBtn').on('click',function () {
+        window.location.href = projectName +"/form/forgetPayPwd/"+phone+"?returnUrl="+returnUrl;
+    });
+
+    // 获取卡号卡密
+    $('.cardBox a').on('click', function () {
+      $('.getModal').show()
+    })
+
+    // 关闭模态框
+    $('.circle').on('click', function () {
+      $('.getModal').hide();
+    })
+
+      //跳详情页面
+    $('.shopBtn').on('click', function () {
+      window.location.href = projectName +"/form/jumpDetails/"+phone+"/"+borrNum+"?prodType="+prodType;
+    })
+
+    // 验证
+    $('.pwd').on('blur', function () {
+      var val = $(this).val();
+      var reg = /^\d{6}$/;
+      if (val.length != 6 || !reg.test(val)) {
+        flag1 = false;
+        $('.toast').text('请输入6位数字交易密码').fadeIn().delay(2000).fadeOut()
+      } else {
+        flag1 = true;
+      }
+    });
+
+
+    $('.trueBtn').on('click', function () {
+      var that = $(this);
+      var bgColor = that.css('background');
+      if (flag1) {
+        // 验证成功
+        $(this).css({
+          background: '#BEE7DC',
+        }).attr('disabled', 'disabled');
+
+        $.ajax({
+          url: projectName +'/user/updateFetchAndGetCardNum/'+ jdCardId,
+          type: 'post',
+          data: $('form').serialize(),
+          dataType: 'json',
+          success: function (data) {
+            if (200 == data.code){
+              var info = data.data;
+              $('.cardBox').html('<p>卡号 ：' + info.cardNum + '</p>' +
+                      '<p>密码 ：' + info.password + '</p>' +
+                      '<p>有效期 ：' + info.startDate+'-'+info.endDate + '</p>')
+              $('.getModal').hide();
+            }else {
+              $('.toast').text(data.info).fadeIn().delay(2000).fadeOut()
+            }
+          },
+          complete: function () {
+            that.css({
+              background: bgColor,
+            }).removeAttr('disabled');
+          }
+        })
+      } else {
+        $('.pwd').trigger('blur');
+      }
+    })
+  $('.historyJD').on('click',function () {
+    if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+      //苹果
+      window.webkit.messageHandlers.previouStep.postMessage(prodType);
+    }else if (navigator.userAgent.match(/android/i)) {
+      //安卓
+      window.dc.previouStep(prodType);
+    }
+  })
+  })
+</script>
+
+</html>

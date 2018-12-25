@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传电子卡</title>
+</head>
+<script>
+    uploadElectronicCardInit();
+</script>
+<body>
+<div class="page-bar" style="margin-bottom: 10px;">
+    <ul class="page-breadcrumb">
+        <li><i class="fa fa-home"></i> <a href="#/dashboard.html">首页</a>
+            <i class="fa fa-angle-right"></i></li>
+        <li>运营管理
+            <i class="fa fa-angle-right"></i></li>
+        <li><a href="#/uploadElectronicCard.html">上传电子卡</a></li>
+    </ul>
+</div>
+
+<div >
+    <form id="form" name="form" class="form-horizontal" target="tg" method="post" action="elctronicCard/upload.action" enctype="multipart/form-data">
+        <input type="hidden" id="productId" name="productId" value="${entity.id}" />
+        <div class="am-mes">
+            <ul>
+                <li>
+                    <span class="am-title">导入京东电子卡：</span>
+                    <input type="text" id="ccbtxt" name="ccbtxt" class="am-txt-200" placeholder="请导入excel文件"  disabled="disabled" />
+                    <input type="button" onmousemove="fs.style.pixelLeft=event.x-60;" value="请选择文件" size="30" onclick="fs.click()" class="upload-btn" />
+                    <input type="file" id="fs" onchange="ccbtxt.value=this.value"name="elctronicCard" class="files-btn" size="1" hidefocus="" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="display:none" />
+                </li>
+            </ul>
+        </div>
+        <div class="operate-btn">
+            <button type="submit" class="btn btn-success btn-s-xs ob-sure">确定</button>
+            <button type="button" class="btn btn-danger btn-s-xs ob-sure ">取消</button>
+        </div>
+        <iframe name="tg" id="tg" style="display: none;"></iframe>
+    </form>
+</div>
+</body>
+</html>

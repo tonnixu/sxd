@@ -1,0 +1,94 @@
+body{
+  width: 100%;
+  background-color: #fff;
+}
+.checked i {
+  position: absolute;
+  top:0;
+  left:0;
+  width: .8rem;
+  height: .8rem;
+  border: 1px solid #c9c9c9;
+  box-sizing: border-box;
+  margin-top: .3rem;
+}
+.checked i.active {
+  background: url('../../images/enjoyLoan/gou2@2x.png') no-repeat center;
+  background-size: 80% 90%;
+  -webkit-background-size: 80% 90%;
+}
+header,footer,.content,.checked {
+  margin: 0 2rem;
+}
+.checked {
+  position: relative;
+  margin-top: 2.2rem;
+}
+.checked div {
+  padding-left: 1.5rem;
+}
+.checked p{
+  font-size: .55rem;
+}
+header {
+  margin-top: 1rem;
+}
+header h2 {
+  font-size: 1rem;
+  text-align: center;   
+  line-height: 2.75rem;
+  border-bottom: 1px dotted #ccc;
+}
+.content li{
+  position: relative;
+  height: 2.75rem;
+  line-height: 2.75rem;
+}
+.content li p {
+  color: #333;
+}
+.content li span {
+  color: #999;
+}
+.btn {
+  margin-top: 1rem;
+  width: 15.8rem;
+}
+/*.foot{
+  padding-bottom: 1rem;
+}*/
+.successModal {
+  background: url('../../images/guang.png') rgba(0, 0, 0 , .5) no-repeat center;
+  background-size: cover;
+  -webkit-background-size: cover;
+
+}
+.successModal  .modalBox .content {
+  margin: 0;
+  font-size: .8rem;
+  border: none;
+  padding: 1rem .5rem 1rem;
+
+}
+.successModal .modalBox{
+  background-color: #fff;
+  border-radius: 5px; 
+}
+.successModal .modalBox a {
+  width: 70%;
+  margin: 0 auto;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #6870DF;
+  font-size: .8rem;
+  height: 1.8rem;
+  line-height: 1.8rem;
+}
+.successModal .top img{
+  display: block;
+  width: 104.5%;
+}
+.successModal .modalBox .top {
+  height: auto;
+  background-color: #6870DF;
+}

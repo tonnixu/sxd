@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jhh.dc.loan.mapper.app.PersonMapper">
+    <resultMap id="BaseResultMap" type="com.jhh.dc.loan.entity.app.Person">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="is_login" property="isLogin" jdbcType="INTEGER"/>
+        <result column="token_id" property="tokenId" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="sync" property="sync" jdbcType="CHAR"/>
+        <result column="is_manual" property="isManual" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="card_num" property="cardNum" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="bank_card" property="bankCard" jdbcType="VARCHAR"/>
+        <result column="pay_password" property="payPassword" jdbcType="VARCHAR"/>
+        <result column="contact_num" property="contactNum" jdbcType="INTEGER"/>
+        <result column="login_time" property="loginTime" jdbcType="DATE"/>
+        <result column="source" property="source" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+		id,phone,
+    is_login, token_id, create_date, update_date, sync, is_manual, description,
+    card_num, name,  bank_name, bank_card, contact_num,login_time
+	</sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from b_person
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from b_person
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+    <insert id="insert" parameterType="com.jhh.dc.loan.entity.app.Person">
+		insert into b_person (id, password,
+		phone, phone_business,
+		phone_service, grade, is_login,
+		token_id, source, inviter,
+		create_date, update_date, sync,
+		is_manual, description, card_num,
+		name, sex, nation,
+		birthday, address, office,
+		start_date, end_date, card_photoz,
+		card_photof, card_photod, card_photov,
+		bank_name, bank_card, contact_url,
+		contact_num, contact_date, balance
+		)
+		values (#{id,jdbcType=INTEGER},  #{password,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},  #{phoneBusiness,jdbcType=VARCHAR},
+		#{phoneService,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}, #{isLogin,jdbcType=INTEGER},
+		#{tokenId,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{inviter,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{sync,jdbcType=CHAR},
+		#{isManual,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{cardNum,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR},
+		#{birthday,jdbcType=DATE}, #{address,jdbcType=VARCHAR}, #{office,jdbcType=VARCHAR},
+		#{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, #{cardPhotoz,jdbcType=VARCHAR},
+		#{cardPhotof,jdbcType=VARCHAR}, #{cardPhotod,jdbcType=VARCHAR}, #{cardPhotov,jdbcType=VARCHAR},
+		#{bankName,jdbcType=VARCHAR}, #{bankCard,jdbcType=VARCHAR}, #{contactUrl,jdbcType=VARCHAR},
+		#{contactNum,jdbcType=INTEGER}, #{contactDate,jdbcType=DATE}, #{balance,jdbcType=DECIMAL}
+		)
+	</insert>
+    <insert id="insertSelective" parameterType="com.jhh.dc.loan.entity.app.Person" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into b_person
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="isLogin != null">
+                is_login,
+            </if>
+            <if test="tokenId != null">
+                token_id,
+            </if>
+
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="sync != null">
+                sync,
+            </if>
+            <if test="isManual != null">
+                is_manual,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="cardNum != null">
+                card_num,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+
+            <if test="bankName != null">
+                bank_name,
+            </if>
+            <if test="bankCard != null">
+                bank_card,
+            </if>
+
+            <if test="contactNum != null">
+                contact_num,
+            </if>
+            <if test="loginTime != null">
+                login_time,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+
+            <if test="isLogin != null">
+                #{isLogin,jdbcType=INTEGER},
+            </if>
+            <if test="tokenId != null">
+                #{tokenId,jdbcType=VARCHAR},
+            </if>
+
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sync != null">
+                #{sync,jdbcType=CHAR},
+            </if>
+            <if test="isManual != null">
+                #{isManual,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="cardNum != null">
+                #{cardNum,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+
+            <if test="bankName != null">
+                #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCard != null">
+                #{bankCard,jdbcType=VARCHAR},
+            </if>
+
+            <if test="contactNum != null">
+                #{contactNum,jdbcType=INTEGER},
+            </if>
+            <if test="loginTime != null">
+                #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jhh.dc.loan.entity.app.Person">
+        update b_person
+        <set>
+
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+
+            <if test="isLogin != null">
+                is_login = #{isLogin,jdbcType=INTEGER},
+            </if>
+            <if test="tokenId != null">
+                token_id = #{tokenId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sync != null">
+                sync = #{sync,jdbcType=CHAR},
+            </if>
+            <if test="isManual != null">
+                is_manual = #{isManual,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="cardNum != null">
+                card_num = #{cardNum,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+
+            <if test="bankName != null">
+                bank_name = #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCard != null">
+                bank_card = #{bankCard,jdbcType=VARCHAR},
+            </if>
+            <if test="contactNum != null">
+                contact_num = #{contactNum,jdbcType=INTEGER},
+            </if>
+            <if test="balance != null">
+                balance = #{balance,jdbcType=DECIMAL},
+            </if>
+            <if test="loginTime != null">
+                login_time = #{loginTime},
+            </if>
+            <if test="payPassword != null">
+                pay_password = #{payPassword},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jhh.dc.loan.entity.app.Person">
+		update b_person
+		set
+		password = #{password,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+
+		phone_business = #{phoneBusiness,jdbcType=VARCHAR},
+		phone_service = #{phoneService,jdbcType=VARCHAR},
+		grade = #{grade,jdbcType=INTEGER},
+		is_login = #{isLogin,jdbcType=INTEGER},
+		token_id = #{tokenId,jdbcType=VARCHAR},
+		source = #{source,jdbcType=VARCHAR},
+		inviter = #{inviter,jdbcType=INTEGER},
+		create_date = #{createDate,jdbcType=TIMESTAMP},
+		update_date = #{updateDate,jdbcType=TIMESTAMP},
+		sync = #{sync,jdbcType=CHAR},
+		is_manual = #{isManual,jdbcType=VARCHAR},
+		description = #{description,jdbcType=VARCHAR},
+		card_num = #{cardNum,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=VARCHAR},
+		nation = #{nation,jdbcType=VARCHAR},
+		birthday = #{birthday,jdbcType=DATE},
+		address = #{address,jdbcType=VARCHAR},
+		office = #{office,jdbcType=VARCHAR},
+		start_date = #{startDate,jdbcType=DATE},
+		end_date = #{endDate,jdbcType=DATE},
+		card_photoz = #{cardPhotoz,jdbcType=VARCHAR},
+		card_photof = #{cardPhotof,jdbcType=VARCHAR},
+		card_photod = #{cardPhotod,jdbcType=VARCHAR},
+		card_photov = #{cardPhotov,jdbcType=VARCHAR},
+		bank_name = #{bankName,jdbcType=VARCHAR},
+		bank_card = #{bankCard,jdbcType=VARCHAR},
+		contact_url = #{contactUrl,jdbcType=VARCHAR},
+		contact_num = #{contactNum,jdbcType=INTEGER},
+		contact_date = #{contactDate,jdbcType=DATE},
+		balance = #{balance,jdbcType=DECIMAL}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+    <select id="userLogin" parameterType="com.jhh.dc.loan.entity.app.Person"
+            resultMap="BaseResultMap">
+		SELECT * FROM b_person WHERE phone = #{phone} AND PASSWORD
+		= #{password} and is_login = 1
+	</select>
+    <!--  根据手机号查询信息，用于登录 -->
+    <select id="userLoginByPhone" parameterType="com.jhh.dc.loan.entity.app.Person"
+            resultMap="BaseResultMap">
+		SELECT * FROM b_person WHERE phone = #{phone} and is_login = 1
+	</select>
+
+    <update id="updatePassword" parameterType="com.jhh.dc.loan.entity.app.Person">
+		UPDATE b_person SET
+		PASSWORD = #{password} WHERE phone = #{phone}
+	</update>
+
+    <update id="personUpdatePassword" parameterType="com.jhh.dc.loan.entity.app.Person">
+		UPDATE b_person
+		SET PASSWORD = #{password} WHERE id = #{id} AND PASSWORD =
+		#{oldPassword}
+	</update>
+    <select id="getPersonByPhone" parameterType="java.lang.String"
+            resultMap="BaseResultMap">
+		SELECT id,  phone,
+    is_login, token_id, create_date, update_date, sync, is_manual, description,
+    card_num, name,
+     bank_name, bank_card, contact_num,login_time,pay_password
+     FROM
+		b_person
+		WHERE phone = #{phone}
+	</select>
+
+    <!-- 获取用户当前tokenId -->
+    <select id="getTokenId" resultType="java.lang.String"
+            parameterType="java.lang.String">
+		select token_id
+		from b_person
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+    <select id="getPersonInfoByBorr" parameterType="java.lang.String"
+            resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		b_person AS v
+		WHERE
+		v.perId=(SELECT l.per_id FROM b_borrow_list as l WHERE l.id = #{brroid,jdbcType=INTEGER})
+	</select>
+
+    <!-- 检查手机号是否黑名单-->
+    <select id="checkBlack" resultType="java.lang.Integer"
+            parameterType="java.lang.String">
+		SELECT COUNT(1) FROM b_person where blacklist = 'Y' AND
+		phone = #{phone}
+	</select>
+
+    <select id="getPersonAvailableBorrowCount" parameterType="java.lang.Integer"
+            resultType="java.lang.Integer">
+		select count(t2.id) from (select id from b_person t where t.id=#{userId} and t.blacklist='N') t1
+		left join b_borrow_list t2 on t1.id = t2.per_id and t2.borr_status = 'BS006'
+	</select>
+
+    <select id="selectByCardNum" resultType="java.lang.Integer" parameterType="java.lang.String">
+		SELECT id FROM b_person where card_num = #{cardNum}
+ 	</select>
+
+    <select id="getPersonInfo" parameterType="java.lang.String" resultType="com.jhh.dc.loan.entity.app_vo.PersonInfo">SELECT p.card_num AS cardNum,
+		pr.monthlypay AS monthlypay, pr.profession AS profession,
+		pr.relatives AS relatives,pr.relatives_name AS relativesName,pr.rela_phone AS relaPhone ,
+		pr.society AS society,pr.society_name AS societyName,pr.soci_phone AS sociPhone ,
+		p.name AS name,p.id AS perId,
+		p.phone AS phone
+		FROM b_person p,private pr
+		WHERE p.id = pr.per_id AND p.id = #{perId}
+	</select>
+
+    <select id="getFollowUsInfo" resultType="java.lang.String">
+		select description FROM c_code_value where code_type = 'menu_followUs' and enabled_flag = 'y'
+	</select>
+
+    <select id="getInviterInfo" resultType="com.jhh.dc.loan.entity.share.InviterInfo">
+		SELECT
+			t5.perId as perId,
+			t5.phone as phone,
+			t5.deviceType as deviceType,
+			t5.firstLevelInviter as firstLevelInviter,
+			t5.firstLevelInviterPhone as firstLevelInviterPhone,
+			t5.secondLevelInviter as secondLevelInviter,
+			t5.secondLevelInviterPhone as secondLevelInviterPhone,
+			t5.thirdLevelInviter as thirdLevelInviter,
+			t6.phone AS thirdLevelInviterPhone
+		FROM(	SELECT
+					t3.*, t4.phone AS secondLevelInviterPhone,
+					t4.inviter AS thirdLevelInviter
+				FROM(	SELECT
+							t1.*, t2.phone AS firstLevelInviterPhone,
+							t2.inviter AS secondLevelInviter
+						FROM(	SELECT
+									t.id AS perId,
+									t.phone,
+									i.device as deviceType,
+									t.inviter AS firstLevelInviter
+								FROM	b_person t
+								LEFT JOIN phone_info i on i.per_id = t.id AND i.borr_id = #{param2}
+								WHERE	t.id = #{param1}) t1
+						LEFT JOIN b_person t2 ON t2.id = t1.firstLevelInviter) t3
+				LEFT JOIN b_person t4 ON t4.id = t3.secondLevelInviter) t5
+		LEFT JOIN b_person t6 ON t6.id = t5.thirdLevelInviter
+	</select>
+
+
+    <select id="getPersonAndDevice" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT
+		p.*,pif.device
+		FROM b_person p LEFT JOIN phone_info pif ON p.id = pif.per_id WHERE p.id = #{perId} LIMIT 1
+	</select>
+
+    <select id="getCardNumAndPhoneByBorrId" parameterType="integer" resultType="map">
+        select p.card_num cardNum, p.phone
+        from
+        b_person p inner join b_borrow_list b on p.id = b.per_id
+        where b.id = #{borrId}
+    </select>
+
+    <select id="getBankByPerId" parameterType="java.lang.Integer" resultType="map">
+        SELECT
+        t1.bank_name AS bankName ,
+        t1.bank_num AS bankNum ,
+        t1.phone AS bankPhone,
+        DATE_FORMAT(t1.creation_date, '%Y/%m/%d') AS createDate,
+        CASE status
+        WHEN '1' THEN '主卡'
+        WHEN '2' THEN '副卡'
+        WHEN '0' THEN '无效卡'
+        END AS status
+        FROM
+        b_bank t1
+        inner JOIN b_person t2 on t1.per_id=t2.id
+        WHERE t2.id = #{perId}
+    </select>
+
+    <update id="updatePersonToLoseBank" parameterType="int">
+        UPDATE b_person
+        SET bank_name = null,
+        bank_card = null
+        WHERE id = #{perId}
+    </update>
+</mapper>

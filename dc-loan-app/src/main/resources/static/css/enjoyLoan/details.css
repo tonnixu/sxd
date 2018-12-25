@@ -1,0 +1,55 @@
+body {
+    background-color: #f3f5f9;
+}
+
+.content {
+    margin-top: .5rem;
+}
+
+.wrapBox {
+    background-color: #fff;
+}
+
+li {
+    border-bottom: 1px solid #e6e6e6;
+}
+
+footer {
+    padding-top: 1rem;
+    padding-bottom: 2.8rem;
+}
+
+.successModal .modalBox {
+    background: #fff;
+}
+.successModal .modalBox .content {
+    color: #666;
+    padding-top: 1rem;
+    border-bottom: 1px solid #ededed;
+}
+.successModal {
+    background: rgba(0, 0, 0 , .5);
+}
+.successModal .modalBox a {
+    position: static;
+    float: left;
+    width: 50%;
+    font-size: .9rem;
+    text-align: center;
+    background: #fff;
+    color: #6870DF;
+}
+.successModal .modalBox .top{
+    color: #fff;
+    height: 2.5rem;
+}
+.successModal .modalBox a:first-child {
+    color: #999;
+}
+.btn {
+    width: 45%;
+}
+
+.cancel {
+    background: #acb0df;
+}
